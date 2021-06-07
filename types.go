@@ -30,4 +30,6 @@ type SpeedTestResult struct {
 	Timestamp     time.Time `json:"timestamp";`
 	Server        SpeedTestResultServer
 	Client        SpeedTestResultClient
+
+	Duration time.Duration
 }

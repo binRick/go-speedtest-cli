@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"strings"
+	"time"
 
 	"bytes"
 	"fmt"
@@ -58,6 +59,8 @@ func get_speedtest_result() (*SpeedTestResult, error) {
 	if !ok {
 		log.Fatal(`speedtest-cli not found`)
 	}
+
+	started := time.Now()
 	speedtest_json, err := execute_speedtest_cli(exec_path)
 	if err != nil {
 		log.Fatal(err)
@@ -67,6 +70,7 @@ func get_speedtest_result() (*SpeedTestResult, error) {
 	if uerr != nil {
 		log.Fatal(uerr)
 	}
+	res.Duration = time.Since(started)
 	return &res, nil
 
 }
